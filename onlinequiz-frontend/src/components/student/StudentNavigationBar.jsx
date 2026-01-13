@@ -1,6 +1,6 @@
 import { FaBook, FaChartLine, FaFileExport, FaHome, FaUserFriends } from "react-icons/fa";
 
-export default function TeacherNavigationBar({ isSidebarOpen }) {
+export default function StudentNavigationBar({ isSidebarOpen }) {
 
     const navigationItems = [
         {
@@ -28,7 +28,7 @@ export default function TeacherNavigationBar({ isSidebarOpen }) {
 
     return (
         <div className="space-y-4">
-            {/* LOGO & TEACHER NAME */}
+            {/* LOGO & STUDENT NAME */}
             <div className="flex flex-col border-y border-gray-700">
                 <div className="p-2 h-14  flex items-center border-b border-gray-700">
                     <div className="w-15 h-full bg-cover bg-no-repeat bg-center" style={{ backgroundImage: "url('/quiz-logo.png')" }}>
@@ -42,13 +42,13 @@ export default function TeacherNavigationBar({ isSidebarOpen }) {
                         </span>
                     </div>
                     <div className="">
-                        <h2 className="text-lg text-gray-300">Teacher Name</h2>
-                        <p className="text-sm text-gray-400">Job Description</p>
+                        <h2 className="text-lg text-gray-300">Student Name</h2>
+                        <p className="text-sm text-gray-400">email</p>
                     </div>
                 </div>
             </div>
 
-            {/* NAVIGATION BAR */}
+            {/* NAVIGATIONS BAR */}
             <nav className={`${!isSidebarOpen ? "" : "px-2"}`}>
                 {navigationItems.map((section, index) => (
                     <div key={index} className="mb-6">

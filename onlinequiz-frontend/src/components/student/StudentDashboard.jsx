@@ -1,19 +1,57 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaBars, FaBell, FaMoon, FaSun, FaUserAlt } from "react-icons/fa";
+import StudentNavigationBar from "./StudentNavigationBar";
 
 export default function StudentDashboard() {
     const [themeColor, setThemeColor] = useState('light');
+    const [isSidebarOpen, setIsSidebarOpen] = useState(() => {
+        const savedState = localStorage.getItem('isSidebarOpen');
+        return savedState ? JSON.parse(savedState) : true;
+    });
+
+    const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
+
+    useEffect(() => {
+        localStorage.setItem('isSidebarOpen', JSON.stringify(isSidebarOpen));
+    }, [isSidebarOpen]);
 
     return (
-        <div className="min-h-screen grid grid-rows-[auto_1fr] grid-cols-[230px_1fr]">
+        <div className={`h-screen grid grid-rows-[auto_1fr] ${isSidebarOpen ? 'md:grid-cols-[230px_1fr]' : 'md:grid-cols-[70px_1fr]'} transition-all ease-out duration-300`}>
             {/* SIDEBAR NAVIGATION*/}
-            <aside className="grid row-span-2 bg-gray-800 text-white p-4">
-
+            <aside className="hidden md:grid row-span-2 bg-gray-800 text-white">
+                <StudentNavigationBar isSidebarOpen={isSidebarOpen} />
             </aside>
+
+            {/* MOBILE SIDEBAR OVERLAY */}
+            {isMobileSidebarOpen && (
+                <div className="fixed inset-0 z-50 md:hidden">
+                    {/* BACKDROP */}
+                    <div
+                        className="absolute inset-0 bg-black/50"
+                        onClick={() => setIsMobileSidebarOpen(false)}
+                    />
+
+                    {/* SIDEBAR */}
+                    <aside className="absolute left-0 top-0 h-full w-64 bg-gray-800 text-white shadow-lg">
+                        <TeacherNavigationBar isSidebarOpen={true} />
+                    </aside>
+                </div>
+            )}
 
             {/* HEADER */}
             <header className="h-14 w-full flex items-center justify-between px-6">
-                <FaBars className="text-gray-600 text-lg hover:text-gray-800 cursor-pointer" />
+            
+                {/* MOBILE SIDEBAR OVERLAY */}
+                <FaBars
+                    className="text-gray-600 text-lg hover:text-gray-800 cursor-pointer md:hidden"
+                    onClick={() => setIsMobileSidebarOpen(true)}
+                />
+
+                <FaBars
+                    className="hidden md:block text-gray-600 text-lg hover:text-gray-800 cursor-pointer"
+                    onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+                />
+
                 <div className="space-x-6 text-md">
                     {themeColor === 'light' ? (
                         <FaMoon className="inline-block cursor-pointer"
@@ -31,8 +69,7 @@ export default function StudentDashboard() {
 
 
             {/* CONTENTS */}
-            <main className="bg-blue-500">
-
+            <main className="">
             </main>
         </div>
     );
