@@ -5,17 +5,17 @@ export default function TeacherNavigationBar({ isSidebarOpen }) {
     const navigationItems = [
         {
             label: 'Overview', items: [
-                { name: 'Dashboard', link: '/teacher-dashboard', icon: <FaHome /> },
+                { name: 'Dashboard', link: '/teacher', icon: <FaHome /> },
             ]
         },
         {
             label: 'Quiz Management', items: [
-                { name: 'Quizzes', link: '/teacher-quizzes', icon: <FaBook /> },
+                { name: 'Quizzes', link: '/teacher/quizzes', icon: <FaBook /> },
             ]
         },
         {
             label: 'Class Management', items: [
-                { name: 'My Classes', link: '/teacher-students', icon: <FaUserFriends /> },
+                { name: 'My Classes', link: '/teacher/classes', icon: <FaUserFriends /> },
             ]
         },
         {
@@ -27,21 +27,22 @@ export default function TeacherNavigationBar({ isSidebarOpen }) {
     ]
 
     return (
-        <div className="space-y-4">
+        <div className={`space-y-4 ${!isSidebarOpen ? "w-[70px]" : "w-[230px]"} transition-all ease-out duration-300`}>
             {/* LOGO & TEACHER NAME */}
             <div className="flex flex-col border-y border-gray-700">
-                <div className="p-2 h-14  flex items-center border-b border-gray-700">
+                <div className={`p-2 h-14 flex items-center border-b border-gray-700 ${!isSidebarOpen ? "justify-center" : ""}`}>
                     <div className="w-15 h-full bg-cover bg-no-repeat bg-center" style={{ backgroundImage: "url('/quiz-logo.png')" }}>
                     </div>
                     <h1 className={`font-bold text-md text-gray-300 tracking-wide ${!isSidebarOpen ? "hidden" : ""}`}>Quiz Time</h1>
                 </div>
-                <div className="flex items-center px-2 py-4">
-                    <div className="w-1/4">
+                <div className={`flex items-center px-2 py-4 ${!isSidebarOpen ? "justify-center" : ""}`}>
+                    <div className={`${!isSidebarOpen ? "w-full flex justify-center" : "w-1/4"}`}>
                         <span className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center text-gray-600">
                             ST
                         </span>
                     </div>
-                    <div className="">
+
+                    <div className={`${!isSidebarOpen ? "hidden" : ""}`}>
                         <h2 className="text-lg text-gray-300">Teacher Name</h2>
                         <p className="text-sm text-gray-400">Job Description</p>
                     </div>

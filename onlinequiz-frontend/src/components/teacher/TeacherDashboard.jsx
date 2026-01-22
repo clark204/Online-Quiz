@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { FaBars, FaBell, FaMoon, FaSun, FaUserAlt } from "react-icons/fa";
 import TeacherOverview from "./contents/TeacherOverview";
 import TeacherNavigationBar from "./TeacherNavigationBar";
+import { Outlet } from "react-router-dom";
 
 export default function TeacherDashboard() {
     const [themeColor, setThemeColor] = useState('light');
@@ -71,7 +72,7 @@ export default function TeacherDashboard() {
 
             {/* CONTENTS */}
             <main className="">
-                <TeacherOverview />
+                <Outlet />
             </main>
         </div>
     );
