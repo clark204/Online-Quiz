@@ -2,11 +2,11 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Login from './modules/auth/Login';
 import SignUp from './modules/auth/SignUp';
 import StudentDashboard from './modules/student/StudentDashboard';
-import TeacherDashboard from './components/teacher/TeacherDashboard';
+import TeacherDashboard from './modules/teacher/TeacherDashboard';
 import AdminDashboard from './modules/admin/AdminDashboard';
 import './App.css';
-import TeacherClass from './components/teacher/contents/TeacherClass';
-import TeacherOverview from './components/teacher/contents/TeacherOverview';
+import TeacherClass from './modules/teacher/contents/TeacherClass';
+import TeacherOverview from './modules/teacher/contents/TeacherOverview';
 
 function App() {
   return (
