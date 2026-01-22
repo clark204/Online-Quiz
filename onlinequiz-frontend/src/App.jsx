@@ -1,12 +1,12 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import Login from './modules/auth/Login';
-import SignUp from './modules/auth/SignUp';
-import StudentDashboard from './modules/student/StudentDashboard';
-import TeacherDashboard from './modules/teacher/TeacherDashboard';
-import AdminDashboard from './modules/admin/AdminDashboard';
+import Login from './auth/Login';
+import SignUp from './auth/SignUp';
+import StudentDashboard from './student/StudentDashboard';
+import TeacherDashboard from './teacher/components/TeacherDashboard';
+import AdminDashboard from './admin/AdminDashboard';
 import './App.css';
-import TeacherClass from './modules/teacher/contents/TeacherClass';
-import TeacherOverview from './modules/teacher/contents/TeacherOverview';
+import TeacherClass from './teacher/modules/classes/TeacherClass';
+import TeacherOverview from './teacher/modules/dashboard/TeacherOverview';
 
 function App() {
   return (

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { FaBars, FaBell, FaMoon, FaSun, FaUserAlt } from "react-icons/fa";
-import TeacherOverview from "./contents/TeacherOverview";
+import TeacherOverview from "../modules/dashboard/TeacherOverview";
 import TeacherNavigationBar from "./TeacherNavigationBar";
 import { Outlet } from "react-router-dom";
 
