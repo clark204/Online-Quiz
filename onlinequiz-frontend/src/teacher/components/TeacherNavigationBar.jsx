@@ -20,8 +20,7 @@ export default function TeacherNavigationBar({ isSidebarOpen }) {
         },
         {
             label: 'Reports', items: [
-                { name: 'Results & Analytics', link: '/teacher-profile', icon: <FaChartLine /> },
-                { name: 'Reports & Export', link: '/teacher-settings', icon: <FaFileExport /> },
+                { name: 'Reports & Analytics', link: '/teacher/analytics', icon: <FaChartLine /> },
             ]
         },
     ]

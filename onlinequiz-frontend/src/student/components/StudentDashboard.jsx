@@ -1,9 +1,19 @@
 import { useEffect, useState } from "react";
 import { FaBars, FaBell, FaMoon, FaSun, FaUserAlt } from "react-icons/fa";
 import StudentNavigationBar from "./StudentNavigationBar";
+import { Outlet } from "react-router-dom";
+import StudentHeader from "./StudentHeader";
 
 export default function StudentDashboard() {
-    const [themeColor, setThemeColor] = useState('light');
+    const [themeColor, setThemeColor] = useState(() => {
+        const savedState = localStorage.getItem('themeColor');
+        return savedState ? savedState : 'light';
+    });
+
+    useEffect(() => {
+        localStorage.setItem('themeColor', themeColor);
+    }, [themeColor]);
+
     const [isSidebarOpen, setIsSidebarOpen] = useState(() => {
         const savedState = localStorage.getItem('isSidebarOpen');
         return savedState ? JSON.parse(savedState) : true;
@@ -33,43 +43,26 @@ export default function StudentDashboard() {
 
                     {/* SIDEBAR */}
                     <aside className="absolute left-0 top-0 h-full w-64 bg-gray-800 text-white shadow-lg">
-                        <TeacherNavigationBar isSidebarOpen={true} />
+                        <StudentNavigationBar isSidebarOpen={true} />
                     </aside>
                 </div>
             )}
 
             {/* HEADER */}
-            <header className="h-14 w-full flex items-center justify-between px-6">
-            
-                {/* MOBILE SIDEBAR OVERLAY */}
-                <FaBars
-                    className="text-gray-600 text-lg hover:text-gray-800 cursor-pointer md:hidden"
-                    onClick={() => setIsMobileSidebarOpen(true)}
+            <header className="">
+                <StudentHeader
+                    isSidebarOpen={isSidebarOpen}
+                    setIsSidebarOpen={setIsSidebarOpen}
+                    setIsMobileSidebarOpen={setIsMobileSidebarOpen}
+                    themeColor={themeColor}
+                    setThemeColor={setThemeColor}
                 />
-
-                <FaBars
-                    className="hidden md:block text-gray-600 text-lg hover:text-gray-800 cursor-pointer"
-                    onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-                />
-
-                <div className="space-x-6 text-md">
-                    {themeColor === 'light' ? (
-                        <FaMoon className="inline-block cursor-pointer"
-                            onClick={() => setThemeColor('dark')}
-                        />
-                    ) : (
-                        <FaSun className="inline-block cursor-pointer"
-                            onClick={() => setThemeColor('light')}
-                        />
-                    )}
-                    <FaBell className="inline-block text-gray-600 cursor-pointer" />
-                    <FaUserAlt className="inline-block text-gray-600 cursor-pointer" />
-                </div>
             </header>
 
 
             {/* CONTENTS */}
-            <main className="">
+            <main className="bg-gray-100">
+                <Outlet />
             </main>
         </div>
     );

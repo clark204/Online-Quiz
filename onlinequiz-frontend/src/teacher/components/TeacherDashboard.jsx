@@ -3,9 +3,18 @@ import { FaBars, FaBell, FaMoon, FaSun, FaUserAlt } from "react-icons/fa";
 import TeacherOverview from "../modules/dashboard/TeacherOverview";
 import TeacherNavigationBar from "./TeacherNavigationBar";
 import { Outlet } from "react-router-dom";
+import TeacherHeader from "./TeacherHeader";
 
 export default function TeacherDashboard() {
-    const [themeColor, setThemeColor] = useState('light');
+    const [themeColor, setThemeColor] = useState(() => {
+        const savedState = localStorage.getItem('themeColor');
+        return savedState ? savedState : 'light';
+    });
+
+    useEffect(() => {
+        localStorage.setItem('themeColor', themeColor);
+    }, [themeColor]);
+
     const [isSidebarOpen, setIsSidebarOpen] = useState(() => {
         const savedState = localStorage.getItem('isSidebarOpen');
         return savedState ? JSON.parse(savedState) : true;
@@ -20,7 +29,7 @@ export default function TeacherDashboard() {
     return (
         <div className={`h-screen grid grid-rows-[auto_1fr] ${isSidebarOpen ? 'md:grid-cols-[230px_1fr]' : 'md:grid-cols-[70px_1fr]'} transition-all ease-out duration-300`}>
             {/* SIDEBAR NAVIGATION*/}
-            <aside className="hidden md:grid row-span-2 bg-gray-800 text-white">
+            <aside className="bg-gray-800 text-white fixed h-svh hidden md:block">
                 <TeacherNavigationBar isSidebarOpen={isSidebarOpen} />
             </aside>
 
@@ -40,38 +49,20 @@ export default function TeacherDashboard() {
                 </div>
             )}
 
-            {/* HEADER */}
-            <header className="h-14 w-full flex items-center justify-between px-6">
-            
-                {/* MOBILE SIDEBAR OVERLAY */}
-                <FaBars
-                    className="text-gray-600 text-lg hover:text-gray-800 cursor-pointer md:hidden"
-                    onClick={() => setIsMobileSidebarOpen(true)}
+            <header className="col-start-2  px-6">
+                <TeacherHeader 
+                themeColor={themeColor} 
+                setThemeColor={setThemeColor}
+                isSidebarOpen={isSidebarOpen}
+                setIsSidebarOpen={setIsSidebarOpen}
+                isMobileSidebarOpen={isMobileSidebarOpen}
+                setIsMobileSidebarOpen={setIsMobileSidebarOpen}
                 />
-
-                <FaBars
-                    className="hidden md:block text-gray-600 text-lg hover:text-gray-800 cursor-pointer"
-                    onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-                />
-
-                <div className="space-x-6 text-md">
-                    {themeColor === 'light' ? (
-                        <FaMoon className="inline-block cursor-pointer"
-                            onClick={() => setThemeColor('dark')}
-                        />
-                    ) : (
-                        <FaSun className="inline-block cursor-pointer"
-                            onClick={() => setThemeColor('light')}
-                        />
-                    )}
-                    <FaBell className="inline-block text-gray-600 cursor-pointer" />
-                    <FaUserAlt className="inline-block text-gray-600 cursor-pointer" />
-                </div>
             </header>
 
 
             {/* CONTENTS */}
-            <main className="">
+            <main className="col-start-2">
                 <Outlet />
             </main>
         </div>

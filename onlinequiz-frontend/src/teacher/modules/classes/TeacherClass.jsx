@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FaBookOpen, FaChevronCircleDown, FaEllipsisV } from "react-icons/fa";
+import { FaBookOpen, FaChevronCircleDown, FaEllipsisV, FaSearch } from "react-icons/fa";
 
 export default function TeacherClass() {
 
@@ -46,12 +46,12 @@ export default function TeacherClass() {
                 </div>
             </div>
             <div className="bg-white rounded-lg border border-gray-300 px-6 h-20 flex items-center justify-between">
-                <div className="md:w-1/2">
-                    <span>
-
+                <div className="relative md:w-1/2">
+                    <span className="absolute inset-y-0 left-0 flex items-center justify-center w-10 text-gray-400 border-r">
+                        <FaSearch />
                     </span>
                     <input type="search" name="search" id="search" placeholder="Search"
-                        className="bg-gray-200 border border-gray-300 rounded px-2 py-1 w-full"
+                        className="px-12 py-1 w-full bg-gray-200 border border-gray-400 rounded focus:outline-none focus:ring-1 focus:ring-gray-500"
                     />
                 </div>
                 <div className="relative flex md:gap-4 gap-2">
@@ -104,7 +104,7 @@ export default function TeacherClass() {
                     )}
                 </div>
             </div>
-            <div className="bg-white rounded-lg border border-gray-300 ">
+            <div className="bg-white rounded-lg border border-gray-300 grid grid-rows-[40px_auto_50px]">
                 <div className="font-medium text-center flex relative">
                     <button
                         className={`
@@ -119,15 +119,15 @@ export default function TeacherClass() {
                     <button
                         className={`
                             ${switchTab === 'classes' ?
-                            'w-[50%] bg-gray-300 rounded-tr-lg p-2 -ml-6' : 
-                            'w-[60%] bg-gray-500 text-white rounded-tr-lg rounded-l-2xl outline p-2 relative'
-                        } cursor-pointer`}
+                                'w-[50%] bg-gray-300 rounded-tr-lg p-2 -ml-6' :
+                                'w-[60%] bg-gray-500 text-white rounded-tr-lg rounded-l-2xl outline p-2 relative'
+                            } cursor-pointer`}
                         onClick={() => setSwitchTab('archived')}
                     >
                         Archived Classes
                     </button>
                 </div>
-                <div className="grid md:grid-cols-4 grid-cols-1 grid-rows-1 row-auto gap-4 p-4">
+                <div className="grid md:grid-cols-3 lg:grid-cols-4 auto-rows-auto gap-4 p-4">
                     {classCards.map((classCard) => (
                         <div key={classCard.id} className="bg-gray-50 rounded-lg border border-gray-300">
                             <div className="flex justify-between p-4">
@@ -156,6 +156,19 @@ export default function TeacherClass() {
                             </div>
                         </div>
                     ))}
+                </div>
+                <div
+                    className="flex items-center justify-between px-4 py-2 border-t border-gray-300 bg-amber-400 rounded-b-lg font-medium"
+                >
+                    <p>Showing 1 to 10 of 100 results</p>
+                    <div className="">
+                        <button className="px-3 py-1 border border-gray-400 rounded-l hover:bg-gray-200 duration-200 cursor-pointer">
+                            Previous
+                        </button>
+                        <button className="px-3 py-1 border border-gray-400 rounded-r hover:bg-gray-200 duration-200 cursor-pointer">
+                            Next
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

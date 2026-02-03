@@ -1,21 +1,21 @@
-import { FaBook, FaChartLine, FaFileExport, FaHome, FaUserFriends } from "react-icons/fa";
+import { FaBook, FaChartLine, FaFileExport, FaHome, FaTasks, FaUserFriends } from "react-icons/fa";
 
 export default function StudentNavigationBar({ isSidebarOpen }) {
 
     const navigationItems = [
         {
-            label: 'Overview', items: [
-                { name: 'Dashboard', link: '/teacher-dashboard', icon: <FaHome /> },
+            label: '', items: [
+                { name: 'Home', link: '/student', icon: <FaHome /> },
             ]
         },
         {
-            label: 'Quiz Management', items: [
-                { name: 'Quizzes', link: '/teacher-quizzes', icon: <FaBook /> },
+            label: 'Task Management', items: [
+                { name: 'To Do', link: '/student/todo', icon: <FaTasks /> },
             ]
         },
         {
             label: 'Class Management', items: [
-                { name: 'My Classes', link: '/teacher-students', icon: <FaUserFriends /> },
+                { name: 'Classes', link: '/student/classes', icon: <FaUserFriends /> },
             ]
         },
         {
@@ -27,7 +27,7 @@ export default function StudentNavigationBar({ isSidebarOpen }) {
     ]
 
     return (
-        <div className="space-y-4">
+        <div className={`space-y-4 ${!isSidebarOpen ? "w-[70px]" : "w-[230px]"} transition-all ease-out duration-300 fixed`}>
             {/* LOGO & STUDENT NAME */}
             <div className="flex flex-col border-y border-gray-700">
                 <div className="p-2 h-14  flex items-center border-b border-gray-700">
@@ -35,13 +35,13 @@ export default function StudentNavigationBar({ isSidebarOpen }) {
                     </div>
                     <h1 className={`font-bold text-md text-gray-300 tracking-wide ${!isSidebarOpen ? "hidden" : ""}`}>Quiz Time</h1>
                 </div>
-                <div className="flex items-center px-2 py-4">
+                <div className="flex items-center px-4 py-4">
                     <div className="w-1/4">
                         <span className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center text-gray-600">
                             ST
                         </span>
                     </div>
-                    <div className="">
+                    <div className={`${!isSidebarOpen ? 'hidden' : ''}`}>
                         <h2 className="text-lg text-gray-300">Student Name</h2>
                         <p className="text-sm text-gray-400">email</p>
                     </div>
