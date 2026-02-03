@@ -15,13 +15,12 @@ export default function StudentNavigationBar({ isSidebarOpen }) {
         },
         {
             label: 'Class Management', items: [
-                { name: 'Classes', link: '/student/classes', icon: <FaUserFriends /> },
+                { name: 'Archived Classes', link: '/student/archived', icon: <FaUserFriends /> },
             ]
         },
         {
             label: 'Reports', items: [
                 { name: 'Results & Analytics', link: '/teacher-profile', icon: <FaChartLine /> },
-                { name: 'Reports & Export', link: '/teacher-settings', icon: <FaFileExport /> },
             ]
         },
     ]

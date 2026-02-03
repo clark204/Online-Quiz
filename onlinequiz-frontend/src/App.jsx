@@ -11,6 +11,7 @@ import TeacherQuiz from './teacher/modules/quizzes/TeacherQuiz';
 import TeacherAnalytics from './teacher/modules/analytics/TeacherAnalytics';
 import StudentClasses from './student/modules/classes/StudentClasses';
 import StudentTask from './student/modules/task/StudentTask';
+import StudentArchivedClass from './student/modules/archived_class/StudentArchivedClass';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path="/student" element={<StudentDashboard />} >
           <Route index element={<StudentClasses />} />
           <Route path='todo' element={<StudentTask />} />
+          <Route path='archived' element={<StudentArchivedClass />} />
         </Route>
 
         {/* TEACHER ROUTES */}
